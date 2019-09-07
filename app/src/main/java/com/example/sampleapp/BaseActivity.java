@@ -9,35 +9,34 @@ import com.helpshift.delegate.AuthenticationFailureReason;
 import com.helpshift.exceptions.InstallException;
 import com.helpshift.support.Log;
 import com.helpshift.support.Support;
-
 import java.io.File;
 
 public class BaseActivity extends Application implements Support.Delegate {
 
   @Override
-  public void onCreate(){
+  public void onCreate() {
     super.onCreate();
 
     Core.init(Support.getInstance());
     InstallConfig installConfig = new InstallConfig.Builder()
         .setEnableInAppNotification(true)
         .build();
-
     try {
       Core.install(this,
-                   "5d3625c9ee54d8bd42c8e210a92be51e",
+                   "2a5bd2674746cfeea5acfcba1a1e76e0",
                    "gayatri.helpshift.com",
-                   "gayatri_platform_20190723091304839-27d7d8537af76b1",
+                   "gayatri_platform_20181018063833353-6d863ba814cb367",
                    installConfig);
     } catch (InstallException e) {
-      Log.e("Helpshift", "invalid install credentials : ", e);
+      android.util.Log.e("Helpshift", "install call : ", e);
     }
 
-    //Delegates
+    android.util.Log.d("Helpshift", Support.libraryVersion + " - is the version for gradle");
+
+    //Set Helpshift Delegate
     Support.setDelegate(this);
+
   }
-
-
 
 
   @Override
