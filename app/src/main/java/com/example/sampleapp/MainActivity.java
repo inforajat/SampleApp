@@ -12,11 +12,7 @@ import com.helpshift.support.Support;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.helpshift.Core.login;
-
-
 public class MainActivity extends AppCompatActivity {
-  private SharedPreferences preferences;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -66,24 +62,9 @@ public class MainActivity extends AppCompatActivity {
     });
   }
 
-  private void onClick (View v){
-    int id = v.getId();
-    if (id == R.id.login_john){
-      login("john", "john doe", "");
-    } else if (id == R.id.login_jane){
-      login("jane", "jane doe", "jane_doe@foo.com");
-    } else if (id == R.id.login_jamie){
-      login("jamie", "", "jamie_doe@bar.com");
-    } else if (id == R.id.login_jessie){
-      login("jessie", "", "");
-    } else if (id == R.id.logout){
-      Core.logout();
-    }
-  }
-
   private void login(final String userId, final String name, final String email){
-    HelpshiftUser user = new  HelpshiftUser.Builder(userId, email)
-        .setName(name)
+    HelpshiftUser user = new  HelpshiftUser.Builder("unique-user-id-746501", "john.doe@app.co")
+        .setName("John Doe")
         .build();
     Core.login(user);
   }
